@@ -1,0 +1,37 @@
+mixin js(x)
+  script(src=`vendor/${x}`)
+mixin css(x)
+  link(rel="stylesheet" href=`vendor/${x}`)
+doctype html
+html
+  head
+    title List
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    +css("bootstrap.min.css")
+    style 
+      include:uglify-css:stylus index.stylus 
+  body.bg-secondary.text-white
+    .vue
+      .navbar.fixed-top.bg-dark.navbar-dark.navbar-expand-md
+        a.navbar-brand(href="#") List
+        .navbar-toggler(data-toggle="collapse" data-target="#menu")
+          .navbar-toggler-icon
+        .collapse.navbar-collapse#menu
+          .navbar-nav
+            .nav-item
+              a.nav-link(href="https://instagram.com/kumpulan.apk") Aplikasi lainnya
+      .container
+        .alert.alert-secondary Double click teks untuk mengedit data
+        .list-group.text-dark
+          .list-group-item(v-for="(x, n) in balik(list)") 
+            .close(@click="hapus(n)") &times;
+            span(@dblclick="mau_edit(n)") {{ x }}
+      .navbar.fixed-bottom.bg-dark.navbar-dark
+        form(@submit.prevent="form")
+          input.form-control(placeholder="List baru..." required v-model="input")
+    +js("jquery.min.js")
+    +js("vue.min.js")
+    +js("bootstrap.min.js")
+    script
+      include:uglify-js:coffee-script(bare=true) index.coffee

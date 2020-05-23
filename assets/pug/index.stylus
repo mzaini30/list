@@ -1,0 +1,7 @@
+*
+  word-wrap break-word
+form 
+  width 100%
+body 
+  padding-top 70px
+  padding-bottom 70px
